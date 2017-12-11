@@ -47,7 +47,7 @@ foreach($response as $records) {
 
   foreach($record_values as $record) {
     $record_value = $record->value;
-    $record_level $record->level;  // Used by MX records
+    $record_level = $record->level;  // Used by MX records
   }
 
 }
@@ -111,6 +111,8 @@ $domain_id = "1234";
 $record_id = "1234";
 $response = constellix_api_delete("domains/$domain_id/records/cname/$record_id");
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## Changelog
 
