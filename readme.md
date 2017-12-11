@@ -20,6 +20,8 @@ define( 'CONSTELLIX_SECRET_KEY', "XXXXXXXXXXXXXXXXXXXXXXXXXXX");
 Next include in WordPress theme or plugin: `include "constellix-api/constellix-api.php";`.
 
 ### Fetch all domains
+
+```
 $response = constellix_api_get("domains");
 
 foreach($response as $domain) {
@@ -27,8 +29,11 @@ foreach($response as $domain) {
   $domain_name = $domain->name;
   $domain_nameservers = $domain->nameservers;
 }
+```
 
 ### Fetching records
+
+```
 $response = constellix_api_get("domains/$domain_id/records/a");
 $response = constellix_api_get("domains/$domain_id/records/mx");
 $response = constellix_api_get("domains/$domain_id/records/cname");
@@ -46,8 +51,11 @@ foreach($response as $records) {
   }
 
 }
+```
 
 ### Creates new domain zone
+
+```
 $post = array(
   "names" => array(
     "newanchordomain1.com",
@@ -61,9 +69,11 @@ foreach($response as $domain) {
   $domain_id = $domain->id;
   $domain_name = $domain->name;
 }
-
+```
 
 ### Creates new CNAME record
+
+```
 $domain_id = "1234";
 
 $post = array(
@@ -73,8 +83,11 @@ $post = array(
   );
 
 $response = constellix_api_post("domains/$domain_id/records/cname", $post);
+```
 
 ### Creates new A record
+
+```
 $domain_id = "1234";
 
 $post = array(
@@ -90,11 +103,14 @@ $post = array(
 );
 
 $response = constellix_api_post("domains/$domain_id/records/a", $post);
+```
 
 ### Deletes Specific CNAME record
+```
 $domain_id = "1234";
 $record_id = "1234";
 $response = constellix_api_delete("domains/$domain_id/records/cname/$record_id");
+```
 
 ## Changelog
 
