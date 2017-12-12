@@ -30,12 +30,12 @@ function constellix_api_post( $command, $post ) {
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
     'headers' => array(
-			"Content-type" => "application/json",
-	    "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
-	    "x-cnsdns-hmac" => $hmac,
-	    "x-cnsdns-requestDate" => $timestamp ),
-		'body' => json_encode($post),
-		'method' => 'POST',
+      "Content-type" => "application/json",
+      "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
+      "x-cnsdns-hmac" => $hmac,
+      "x-cnsdns-requestDate" => $timestamp ),
+    'body' => json_encode($post),
+    'method' => 'POST',
   );
   $remote = wp_remote_post( "https://api.dns.constellix.com/v1/$command/", $args);
 
@@ -49,12 +49,12 @@ function constellix_api_delete( $command ) {
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
     'headers' => array(
-			"Content-type" => "application/json",
-	    "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
-	    "x-cnsdns-hmac" => $hmac,
-	    "x-cnsdns-requestDate" => $timestamp ),
-		'body' => json_encode($post),
-		'method' => 'DELETE',
+      "Content-type" => "application/json",
+      "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
+      "x-cnsdns-hmac" => $hmac,
+      "x-cnsdns-requestDate" => $timestamp ),
+    'body' => json_encode($post),
+    'method' => 'DELETE',
   );
   $remote = wp_remote_post( "https://api.dns.constellix.com/v1/$command/", $args);
 
