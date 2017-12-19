@@ -34,15 +34,15 @@ foreach($response as $domain) {
 ### Fetching records
 
 ```
+$domain_id = "1234";
 $response = constellix_api_get("domains/$domain_id/records/a");
 $response = constellix_api_get("domains/$domain_id/records/mx");
 $response = constellix_api_get("domains/$domain_id/records/cname");
-$response = constellix_api_get("domains/$domain_id/records/httprr"); # HTTP Redirection Record
+$response = constellix_api_get("domains/$domain_id/records/httpredirection");
 
 foreach($response as $records) {
   $record_id = $records->id;
   $record_name = $records->name;
-  $record_zone = $records->zone;  // Used for CNAME records
   $record_values = $records->value;
 
   foreach($record_values as $record) {
@@ -71,20 +71,6 @@ foreach($response as $domain) {
 }
 ```
 
-### Creates new CNAME record
-
-```
-$domain_id = "1234";
-
-$post = array(
-  "name" => "sample",
-  "host" => "new.anchor.host",
-  "ttl" => 1800,
-  );
-
-$response = constellix_api_post("domains/$domain_id/records/cname", $post);
-```
-
 ### Creates new A record
 
 ```
@@ -105,6 +91,85 @@ $post = array(
 $response = constellix_api_post("domains/$domain_id/records/a", $post);
 ```
 
+### Creates new CNAME record
+
+```
+$domain_id = "1234";
+
+$post = array(
+  "name" => "cdn",
+  "host" => "lorem-1234.kxcdn.com.",
+  "ttl" => 1800,
+);
+
+$response = constellix_api_post("domains/$domain_id/records/cname", $post);
+```
+
+### Creates new HTTP Redirection Record
+
+```
+$domain_id = "1234";
+
+$post = array(
+  "name" => "plans",
+  "ttl" => 1800,
+  "url" => "https://anchor.host/plans/",
+	"redirectTypeId" => "3",
+);
+
+$response = constellix_api_post("domains/$domain_id/records/httpredirection", $post);
+```
+
+### Updates existing A record
+```
+$domain_id = "1234";
+$record_id = "1234";
+
+$post = array(
+  "recordOption" => "roundRobin",
+  "name" => "www",
+  "ttl" => 1800,
+  "roundRobin" => array(
+    array(
+      "value" => "104.197.69.102",
+      "disableFlag" => false,
+    ),
+   ),
+);
+
+$response = constellix_api_put("domains/$domain_id/records/a/$record_id", $post);
+```
+
+### Updates existing CNAME record
+```
+$domain_id = "1234";
+$record_id = "1234";
+
+$post = array(
+  "name" => "cdn",
+  "host" => "lorem-1234.kxcdn.com.",
+  "ttl" => 1800,
+);
+
+$response = constellix_api_put("domains/$domain_id/records/cname/$record_id", $post);
+```
+
+### Updates existing HTTP Redirection Record
+
+```
+$domain_id = "1234";
+$record_id = "1234";
+
+$post = array(
+  "name" => "plans",
+  "ttl" => 1800,
+  "url" => "https://anchor.host/plans/",
+	"redirectTypeId" => "3",
+);
+
+$response = constellix_api_post("domains/$domain_id/records/httpredirection/$record_id", $post);
+```
+
 ### Deletes Specific CNAME record
 ```
 $domain_id = "1234";
@@ -116,8 +181,10 @@ $response = constellix_api_delete("domains/$domain_id/records/cname/$record_id")
 
 ## Changelog
 
+## [0.1.1] - 2017-12-18
+- Added new PHP wrapper for sending PUT request to [Constellix's API](http://help.constellix.com/rest-api/). Updated docs with examples of updating existing records.
+
 ## [0.1.0] - 2017-12-11
-### Added
 - Initial release of constellix-api.php. Includes PHP wrappers for sending GET, POST and DELETE requests to [Constellix's API](http://help.constellix.com/rest-api/). Based on their [official Perl code sample](https://support.constellix.com/index.php?/Knowledgebase/Article/View/3/4/download-constellixapipl).
 
 **[Back to top](#table-of-contents)**
