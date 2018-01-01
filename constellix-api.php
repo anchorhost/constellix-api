@@ -13,6 +13,7 @@ function constellix_api_get( $command ) {
   $timestamp = round(microtime(true) * 1000);
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
+    'timeout' => 30,
     'headers' => array( "Content-type" => "application/json",
     "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
     "x-cnsdns-hmac" => $hmac,
@@ -20,7 +21,11 @@ function constellix_api_get( $command ) {
   );
   $remote = wp_remote_get( "https://api.dns.constellix.com/v1/$command/", $args);
 
-  return json_decode ( $remote["body"] );
+  if( is_wp_error( $remote ) ) {
+    return $remote->get_error_message();
+  } else {
+    return json_decode ( $remote["body"] );
+  }
 
 }
 
@@ -29,6 +34,7 @@ function constellix_api_post( $command, $post ) {
   $timestamp = round(microtime(true) * 1000);
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
+    'timeout' => 30,
     'headers' => array(
       "Content-type" => "application/json",
       "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
@@ -39,7 +45,11 @@ function constellix_api_post( $command, $post ) {
   );
   $remote = wp_remote_post( "https://api.dns.constellix.com/v1/$command/", $args);
 
-  return json_decode ( $remote["body"] );
+  if( is_wp_error( $remote ) ) {
+    return $remote->get_error_message();
+  } else {
+    return json_decode ( $remote["body"] );
+  }
 
 }
 
@@ -48,6 +58,7 @@ function constellix_api_put( $command, $post ) {
   $timestamp = round(microtime(true) * 1000);
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
+    'timeout' => 30,
     'headers' => array(
       "Content-type" => "application/json",
       "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
@@ -58,7 +69,11 @@ function constellix_api_put( $command, $post ) {
   );
   $remote = wp_remote_post( "https://api.dns.constellix.com/v1/$command/", $args);
 
-  return json_decode ( $remote["body"] );
+  if( is_wp_error( $remote ) ) {
+    return $remote->get_error_message();
+  } else {
+    return json_decode ( $remote["body"] );
+  }
 
 }
 
@@ -67,6 +82,7 @@ function constellix_api_delete( $command ) {
   $timestamp = round(microtime(true) * 1000);
   $hmac = base64_encode(hash_hmac( "sha1", $timestamp, CONSTELLIX_SECRET_KEY, true ));
   $args = array(
+    'timeout' => 30,
     'headers' => array(
       "Content-type" => "application/json",
       "x-cnsdns-apiKey" => CONSTELLIX_API_KEY,
@@ -77,6 +93,10 @@ function constellix_api_delete( $command ) {
   );
   $remote = wp_remote_post( "https://api.dns.constellix.com/v1/$command/", $args);
 
-  return json_decode ( $remote["body"] );
+  if( is_wp_error( $remote ) ) {
+    return $remote->get_error_message();
+  } else {
+    return json_decode ( $remote["body"] );
+  }
 
 }

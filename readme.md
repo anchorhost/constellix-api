@@ -36,6 +36,7 @@ foreach($response as $domain) {
 ```
 $domain_id = "1234";
 $response = constellix_api_get("domains/$domain_id/records/a");
+$response = constellix_api_get("domains/$domain_id/records/aaaa");
 $response = constellix_api_get("domains/$domain_id/records/mx");
 $response = constellix_api_get("domains/$domain_id/records/cname");
 $response = constellix_api_get("domains/$domain_id/records/httpredirection");
@@ -180,6 +181,10 @@ $response = constellix_api_delete("domains/$domain_id/records/cname/$record_id")
 **[Back to top](#table-of-contents)**
 
 ## Changelog
+
+## [0.1.2] - 2017-12-18
+- Increased timeouts to 30 seconds.
+- Added basic error handling
 
 ## [0.1.1] - 2017-12-18
 - Added new PHP wrapper for sending PUT request to [Constellix's API](http://help.constellix.com/rest-api/). Updated docs with examples of updating existing records.
