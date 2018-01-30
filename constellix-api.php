@@ -91,7 +91,7 @@ function constellix_api_delete( $command ) {
 			'Content-type'         => 'application/json',
 			'x-cnsdns-apiKey'      => CONSTELLIX_API_KEY,
 			'x-cnsdns-hmac'        => $hmac,
-			'x-cnsdns -requestDate' => $timestamp,
+			'x-cnsdns-requestDate' => $timestamp,
 		),
 		'body'    => json_encode( $post ),
 		'method'  => 'DELETE',
