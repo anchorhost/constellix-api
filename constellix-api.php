@@ -13,7 +13,7 @@ function constellix_api_get( $command ) {
 	$timestamp = round( microtime( true ) * 1000 );
 	$hmac      = base64_encode( hash_hmac( 'sha1', $timestamp, CONSTELLIX_SECRET_KEY, true ) );
 	$args      = [
-		'timeout' => 30,
+		'timeout' => 120,
 		'headers' => [
 			'Content-type'         => 'application/json',
 			'x-cnsdns-apiKey'      => CONSTELLIX_API_KEY,
@@ -36,7 +36,7 @@ function constellix_api_post( $command, $post ) {
 	$timestamp = round( microtime( true ) * 1000 );
 	$hmac      = base64_encode( hash_hmac( 'sha1', $timestamp, CONSTELLIX_SECRET_KEY, true ) );
 	$args      = [
-		'timeout' => 30,
+		'timeout' => 120,
 		'headers' => [
 			'Content-type'         => 'application/json',
 			'x-cnsdns-apiKey'      => CONSTELLIX_API_KEY,
@@ -61,7 +61,7 @@ function constellix_api_put( $command, $post ) {
 	$timestamp = round( microtime( true ) * 1000 );
 	$hmac      = base64_encode( hash_hmac( 'sha1', $timestamp, CONSTELLIX_SECRET_KEY, true ) );
 	$args      = [
-		'timeout' => 30,
+		'timeout' => 120,
 		'headers' => [
 			'Content-type'         => 'application/json',
 			'x-cnsdns-apiKey'      => CONSTELLIX_API_KEY,
@@ -86,7 +86,7 @@ function constellix_api_delete( $command ) {
 	$timestamp = round( microtime( true ) * 1000 );
 	$hmac      = base64_encode( hash_hmac( 'sha1', $timestamp, CONSTELLIX_SECRET_KEY, true ) );
 	$args      = [
-		'timeout' => 30,
+		'timeout' => 120,
 		'headers' => [
 			'Content-type'         => 'application/json',
 			'x-cnsdns-apiKey'      => CONSTELLIX_API_KEY,
